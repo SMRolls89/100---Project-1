@@ -1,5 +1,5 @@
 /**
- * TODO: add file header
+ * Name: Steffe Reyes (A16083679)
  */
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
@@ -20,8 +20,10 @@ class BSTNode {
     BSTNode<Data>* right;
     BSTNode<Data>* parent;
 
-    /** TODO */
-    BSTNode(const Data& d) : data(d) {}
+    /*Initializing a BSTNode/ no parent and no children */
+    BSTNode(const Data& d) : data(d) {
+    	left = right = parent = 0;
+    }
 
     /** Set the value of data */
     void setData(const Data& d) { data = d; }
@@ -30,7 +32,33 @@ class BSTNode {
     Data getData() { return data; }
 
     /** TODO */
-    BSTNode<Data>* successor() { return 0; }
+    BSTNode<Data>* successor() {
+	  BSTNode<Data> *curr = this;
+	  
+	  //Continue until we reach the leftmost leaf
+	  if(curr->right) {
+		  curr = curr->right;
+		  
+		  while (curr->left) {
+			  curr = curr->left;
+		  }
+		  return curr;
+	  }
+	  //if successor is parent
+	  else {
+		 while (curr->parent) {
+			if (curr->left == this) {
+			       return curr->parent;
+			}
+	 		if (curr->parent && curr->data > this->data) {
+				return current->parent;
+			}
+		}		
+	    
+	  } 
+	  //if no successor found
+	    return 0;
+    }
 };
 
 /**
