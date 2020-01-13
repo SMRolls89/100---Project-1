@@ -1,5 +1,6 @@
 /**
- * TODO: add file header
+ * Steffe Reyes (A16083679)
+ *
  */
 #ifndef BST_HPP
 #define BST_HPP
