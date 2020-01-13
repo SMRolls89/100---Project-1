@@ -1,5 +1,6 @@
 /**
  * Name: Steffe Reyes (A16083679)
+ * Ji Hyun An (A91108783)
  */
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
