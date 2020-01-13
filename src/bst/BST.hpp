@@ -43,16 +43,19 @@ class BST {
 
     /** TODO */
     bool insert(const Data& item) {
+	    //if root is empty, add new node to root
 	    if (this->root == 0) {
 		    root = new BSTNode<Data> (item);
 
 		    ++isize;
 		    return true;
 	    }
+	    //root node not empty, so insert node to correct position
 	    else {
 		    BSTNode<Data>* curr = this->root;
 
 		    while(curr) {
+			    //if node belongs in left subtree
 			    if(item < curr->data) {
 				    if(curr->left == 0) {
 					    curr->left = new BSTNode<Data> (item);
@@ -63,19 +66,21 @@ class BST {
 					    curr = curr->left;
 			    }
 
-			    //duplicated data
-			    else if (!(item < curr->data) && !(curr->data < item)) {
-				    return false;
 			    }
-
-			    else {
+			    //node belongs in the right subtree
+			    else if (curr->data < item) {
 				    if (curr->right == 0) {
 					    curr->right = new BSTNode<Data> (item);
 					    (curr->right)->parent = curr;
 					    break;
 				    }
 				    else
-					    curr = cur->right;
+					    curr = curr->right;
+			    }
+
+			    //if duplicated data
+			    else if (!(item < curr->data) && !(curr->data < item)) {
+				    return false;
 			    }
 		    }
 
