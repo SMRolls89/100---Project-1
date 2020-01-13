@@ -42,7 +42,48 @@ class BST {
     ~BST() {}
 
     /** TODO */
-    bool insert(const Data& item) { return false; }
+    bool insert(const Data& item) {
+	    if (this->root == 0) {
+		    root = new BSTNode<Data> (item);
+
+		    ++isize;
+		    return true;
+	    }
+	    else {
+		    BSTNode<Data>* curr = this->root;
+
+		    while(curr) {
+			    if(item < curr->data) {
+				    if(curr->left == 0) {
+					    curr->left = new BSTNode<Data> (item);
+					    (curr->left)->parent = curr;
+					    break;
+				    }
+				    else
+					    curr = curr->left;
+			    }
+
+			    //duplicated data
+			    else if (!(item < curr->data) && !(curr->data < item)) {
+				    return false;
+			    }
+
+			    else {
+				    if (curr->right == 0) {
+					    curr->right = new BSTNode<Data> (item);
+					    (curr->right)->parent = curr;
+					    break;
+				    }
+				    else
+					    curr = cur->right;
+			    }
+		    }
+
+		    ++isize;
+
+		    return true;
+	   
+    }
 
     /** TODO */
     iterator find(const Data& item) const { return 0; }
