@@ -1,6 +1,7 @@
 /**
- * TODO: add file header
- */
+ * Steffe Reyes (A16083679)
+ * Ji Hyun An (A91108783)
+ * */
 #ifndef BSTITERATOR_HPP
 #define BSTITERATOR_HPP
 #include <iterator>
@@ -40,11 +41,21 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
         return before;
     }
 
-    /** TODO */
-    bool operator==(BSTIterator<Data> const& other) const { return false; }
+    /** equality test */
+    bool operator==(BSTIterator<Data> const& other) const {
+	    if(curr = other.curr)
+		   return true;
+	    else
+		   return false;
+    }
 
-    /** TODO */
-    bool operator!=(BSTIterator<Data> const& other) const { return false; }
+    /** inequality test */
+    bool operator!=(BSTIterator<Data> const& other) const {
+	    if(curr != other.curr)
+		    return true;
+	    else
+		    return false;
+    }
 };
 
 #endif  // BSTITERATOR_HPP
