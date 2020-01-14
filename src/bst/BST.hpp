@@ -47,7 +47,7 @@ class BST {
     /** insert a Node  */
     bool insert(const Data& item) {
 	    //if root is empty, add new node to root
-	    if (root == 0) {
+	    if (empty()) {
 		    root = new BSTNode<Data> (item);
 
 		    ++isize;
@@ -105,7 +105,7 @@ class BST {
 	  BSTNode<Data>* curr = this->root;
 	  
 	  //if BST is empty
-	  if (root == 0) {
+	  if (empty()) {
 		  return 0;
 	  }
 
@@ -163,7 +163,7 @@ class BST {
 
     /** return an iterator pointing to the first item in BST */
     iterator begin() const { 
-	    return iterator((BST<Data>::first(root)); 
+	    return BST<Data>::iterator(first(root)); 
     }
 
     /** Return an iterator pointing past the last item in the BST. */
@@ -171,7 +171,8 @@ class BST {
 
     /**perform an inorder traversal of BST */
     vector<Data> inorder() const {
-    
+
+   	    return inroder(root); 
     }
 
     /**
@@ -257,7 +258,7 @@ class BST {
     }
 
     // Add more helper functions below
-    // height helper
+    // recursive height helper function
     int heightHelper(BSTNode<Data>* n) const {
 
 	    int right = heightHelper(n->right)
@@ -269,6 +270,23 @@ class BST {
 	    else {
 		    return (left+1);
 	    }
+    }
+
+    //Recursive inroder traversal helper function 
+    vector<Data> inorder(BSTNode<Data>* n) const {
+	    vector<Data> v1;
+
+	    if (n == 0) {
+		    return v1; //can you return an empty vector?
+	    }
+	    //traverse the left subtree
+	    inorder(n->left);
+	    //add current node to vector
+	    v1.push_back(*n);
+	    //traverse the right subtree
+	    inorder(n->right);
+
+	    return v1;
     }
 };
 
