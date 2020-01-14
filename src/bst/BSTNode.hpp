@@ -52,7 +52,7 @@ class BSTNode {
 			       return curr->parent;
 			}
 	 		if (curr->parent && curr->data > this->data) {
-				return current->parent;
+				return curr->parent;
 			}
 		}		
 	    
