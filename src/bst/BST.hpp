@@ -44,10 +44,10 @@ class BST {
 	    deleteAll(root);
     }
 
-    /** insert a Nod  */
+    /** insert a Node  */
     bool insert(const Data& item) {
 	    //if root is empty, add new node to root
-	    if (this->root == 0) {
+	    if (root == 0) {
 		    root = new BSTNode<Data> (item);
 
 		    ++isize;
@@ -103,11 +103,13 @@ class BST {
     /** TODO */
     iterator find(const Data& item) const {
 	  BSTNode<Data>* curr = this->root;
-
-	  if (this->root == 0) {
+	  
+	  //if BST is empty
+	  if (root == 0) {
 		  return 0;
 	  }
 
+	  //if BST not empty, search for item
 	  while(curr) {
 		  if (item < curr->data) {
 			  curr = curr->left;
@@ -115,33 +117,62 @@ class BST {
 		  else if (curr->data < item) {
 			  curr = curr->right;
 		  }
-		  else
-			  return 0; //FIX THIS!
+		  else { //found a match!
+			  return curr;
+		  }
 	  }
 
+	  //if item not found, or pointing past last node
+	  return this -> end();
 
     }
 
     /** TODO */
     bool deleteNode(const Data& item) { return false; }
 
-    /** TODO */
-    unsigned int size() const { return 0; }
+    /** return number of items currently in BST */
+    unsigned int size() const { 
+	    return isize;
+    }
 
-    /** TODO */
-    int height() const { return 0; }
+    /** calculates the height of the BST */
+    int height() const {
+	    BSTNode<Data>* curr = this->root;
+	    //empty BST
+	    if (isize == 0){
+		return -1;
+	    }
+	    //if only root node (one node)
+	    else if (isize == 1) {
+		return 0;
+	    }	
+    	    else { //height is not -1 or 0, call height helper method
+		return heightHelper(curr);
+	    }		
+    }
 
-    /** TODO */
-    bool empty() const { return false; }
+    /** checks if BST is empty or not */
+    bool empty() const { 
+	    if (root == 0) { 
+		    return true;
+	    }
+	    else { //BST not empty
+		    return false;
+	    }
+    }
 
-    /** TODO */
-    iterator begin() const { return 0; }
+    /** return an iterator pointing to the first item in BST */
+    iterator begin() const { 
+	    return iterator((BST<Data>::first(root)); 
+    }
 
     /** Return an iterator pointing past the last item in the BST. */
     iterator end() const { return typename BST<Data>::iterator(0); }
 
-    /** TODO */
-    vector<Data> inorder() const {}
+    /**perform an inorder traversal of BST */
+    vector<Data> inorder() const {
+    
+    }
 
     /**
      * DO NOT CHANGE THIS METHOD
@@ -226,6 +257,19 @@ class BST {
     }
 
     // Add more helper functions below
+    // height helper
+    int heightHelper(BSTNode<Data>* n) const {
+
+	    int right = heightHelper(n->right)
+	    int left = heightHelper(n->left)
+
+	    if (left < right){
+		    return (right+1);
+	    }
+	    else {
+		    return (left+1);
+	    }
+    }
 };
 
 #endif  // BST_HPP
