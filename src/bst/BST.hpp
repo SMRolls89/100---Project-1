@@ -39,10 +39,12 @@ class BST {
     /** TODO */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
 
-    /** TODO */
-    ~BST() {}
+    /** delete every node in the BST */
+    ~BST() {
+	    deleteAll(root);
+    }
 
-    /** TODO */
+    /** insert a Nod  */
     bool insert(const Data& item) {
 	    //if root is empty, add new node to root
 	    if (this->root == 0) {
@@ -63,8 +65,10 @@ class BST {
 					    (curr->left)->parent = curr;
 					    break;
 				    }
-				    else
+				    else {
+					    //go to the next left leaf
 					    curr = curr->left;
+				    }
 			    }
 
 			    }
@@ -75,13 +79,18 @@ class BST {
 					    (curr->right)->parent = curr;
 					    break;
 				    }
-				    else
+				    else {
+					    //go to next right leaf
 					    curr = curr->right;
+				    }
 			    }
 
-			    //if duplicated data
-			    else if (!(item < curr->data) && !(curr->data < item)) {
-				    return false;
+			    //if item is a duplicate
+			    else {
+				    //if it is equal to curr
+				    if (!(item < curr->data) && !(curr->data < item)) {
+					    return false;
+				    }
 			    }
 		    }
 
@@ -92,7 +101,26 @@ class BST {
     }
 
     /** TODO */
-    iterator find(const Data& item) const { return 0; }
+    iterator find(const Data& item) const {
+	  BSTNode<Data>* curr = this->root;
+
+	  if (this->root == 0) {
+		  return 0;
+	  }
+
+	  while(curr) {
+		  if (item < curr->data) {
+			  curr = curr->left;
+		  }
+		  else if (curr->data < item) {
+			  curr = curr->right;
+		  }
+		  else
+			  return 0; //FIX THIS!
+	  }
+
+
+    }
 
     /** TODO */
     bool deleteNode(const Data& item) { return false; }
@@ -161,10 +189,20 @@ class BST {
     }
 
   private:
-    /** TODO Helper function for begin() */
-    static BSTNode<Data>* first(BSTNode<Data>* root) { return 0; }
+    /** Helper function for begin() */
+    /** Find the first element of the BST */
+    static BSTNode<Data>* first(BSTNode<Data>* root) { 
+	    if(root == 0) {
+		    return 0;
+	    }
+	    while (root->left !=0) {
+		    root = root->left;
+	    }
+	    return root;
+    }
 
-    /** TODO */
+
+    /** delete all nodes */
     static void deleteAll(BSTNode<Data>* n) {
         /* Pseudocode:
            if current node is null: return;
@@ -172,6 +210,13 @@ class BST {
            recursively delete right sub-tree
            delete current node
         */
+	    if (n == 0){
+		    return;
+	    }
+
+	    delete(n->left);
+	    delete(n->right);
+	    delete n;
     }
 
     /** TODO */
