@@ -21,7 +21,7 @@ class BSTNode {
     BSTNode<Data>* right;
     BSTNode<Data>* parent;
 
-    /*Initializing a BSTNode/ no parent and no children */
+    /**Initializing a BSTNode with given data/ no parent and no children*/ 
     BSTNode(const Data& d) : data(d) {
     	left = right = parent = 0;
     }
@@ -32,11 +32,12 @@ class BSTNode {
     /** Get the value of data */
     Data getData() { return data; }
 
-    /** TODO */
+    /**Return the successor of a BSTNode, or 0 if none */
     BSTNode<Data>* successor() {
 	  BSTNode<Data> *curr = this;
 	  
-	  //Continue until we reach the leftmost leaf
+	  //if there's a right subtree, then successor
+	  //is the most left node of the right subtree
 	  if(curr->right) {
 		  curr = curr->right;
 		  
@@ -57,7 +58,7 @@ class BSTNode {
 		}		
 	    
 	  } 
-	  //if no successor found
+	  //otherwise, no successor found
 	    return 0;
     }
 };
