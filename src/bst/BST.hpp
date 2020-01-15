@@ -59,7 +59,7 @@ class BST {
 
 		    while(curr) {
 			    //if node belongs in left subtree
-			    if(item < curr->data) {
+			    if(item < curr->data) { 
 				    if(curr->left == 0) {
 					    curr->left = new BSTNode<Data> (item);
 					    (curr->left)->parent = curr;
@@ -70,10 +70,8 @@ class BST {
 					    curr = curr->left;
 				    }
 			    }
-
-			    }
 			    //node belongs in the right subtree
-			    else if (curr->data < item) {
+			    else if (curr->data < item) { 
 				    if (curr->right == 0) {
 					    curr->right = new BSTNode<Data> (item);
 					    (curr->right)->parent = curr;
@@ -88,11 +86,12 @@ class BST {
 			    //if item is a duplicate
 			    else {
 				    //if it is equal to curr
-				    if (!(item < curr->data) && !(curr->data < item)) {
+				    if (!(item < curr->data) && !(curr->data < item)) { 
 					    return false;
 				    }
 			    }
 		    }
+	    }
 
 		    ++isize;
 
@@ -261,8 +260,8 @@ class BST {
     // recursive height helper function
     int heightHelper(BSTNode<Data>* n) const {
 
-	    int right = heightHelper(n->right)
-	    int left = heightHelper(n->left)
+	    int right = heightHelper(n->right);
+	    int left = heightHelper(n->left);
 
 	    if (left < right){
 		    return (right+1);

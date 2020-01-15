@@ -43,7 +43,7 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
 
     /** equality test */
     bool operator==(BSTIterator<Data> const& other) const {
-	    if(curr = other.curr)
+	    if(curr == other.curr)
 		   return true;
 	    else
 		   return false;
