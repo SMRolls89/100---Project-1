@@ -13,13 +13,13 @@ using namespace std;
  */
 template <typename Data>
 class BSTNode {
-  private:
-    Data data;
 
   public:
     BSTNode<Data>* left;
     BSTNode<Data>* right;
     BSTNode<Data>* parent;
+
+    Data data;
 
     /**Initializing a BSTNode with given data/ no parent and no children*/ 
     BSTNode(const Data& d) : data(d) {
