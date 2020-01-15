@@ -171,7 +171,7 @@ class BST {
     /**perform an inorder traversal of BST */
     vector<Data> inorder() const {
 
-   	    return inroder(root); 
+   	    return inorder(root); 
     }
 
     /**
