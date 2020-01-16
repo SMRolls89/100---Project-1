@@ -1,6 +1,7 @@
 /**
  * Name: Steffe Reyes (A16083679)
  * Ji Hyun An (A91108783)
+ * CSE100 PA1
  */
 #ifndef BSTNODE_HPP
 #define BSTNODE_HPP
@@ -9,7 +10,8 @@
 using namespace std;
 
 /**
- * TODO: add class header
+ * 
+ *
  */
 template <typename Data>
 class BSTNode {
@@ -32,65 +34,57 @@ class BSTNode {
     /** Get the value of data */
     Data getData() { return data; }
 
-    /**Return the successor of a BSTNode, or 0 if none */
+    /**Return the successor of a BSTNode, or 0 if none
+     * The successor of a BSTNode is the node with the smallest element
+     * that is greater than the BSTNode
+     */
     BSTNode<Data>* successor() {
-	 BSTNode<Data> *curr = this;
-	  
-	  //if there's a right subtree, then successor
-	  //is the most left node of the right subtree
-	 /** if(curr->right) {
-		  curr = curr->right;
-		  
-		  while (curr->left) {
-			  curr = curr->left;
-		  }
-		  return curr;
-	  }
-	  //if successor is parent
-	  else {
-		 while (curr->parent) {
-			if (curr->left == this) {
-			       return curr->parent;
-			}
-	 		if (curr->parent && curr->data > this->data) {
-				return curr->parent;
-			}
-		}		
-	    
-	  } 
-	  //otherwise, no successor found
-	    return 0;
-    }*/
-	    if (this->right == 0) {
+	BSTNode<Data> *curr = this;
+	 
+	//if node does not have a right child, then successor must be one of its ancestors	 
+	if (curr->right == 0) {
+		
+		//if node is the root, with no right child, therefore no successor
+	 	if (curr->parent == 0){
+		 	return 0;
+	 	}
+		
+		//if  node has a parent and current node is the left child 
+		//then successor is simply its parent
+	 	if (curr == ((curr->parent) -> left)) {
+		 	return curr->parent;
+	 	}
+		//otherwise successor is one of its ancestors
+	 	else {
+		 	while(curr != (curr->parent) -> left) {
 
-		    if (this->parent == 0){
-			    return 0;
-		    }
-
-		    if (this == ((this->parent) -> left)) {
-			    return this->parent;
-		    }
-		    else {
-			   while(curr != (curr->parent) -> left) {
-				  curr = curr->parent;
-				 if(curr->parent == 0)
-					return 0;
-			   }
-			   curr = curr->parent;
-			   return curr;
-		    }
-	    }
-
-	    else {
-		    curr = this->right;
-
-		    while (curr->left != 0){
-			    curr = curr->left;
-		    }
-
-		    return curr;
-	    }
+			 	curr = curr->parent;
+	
+				//this is when the Node is the largest in BST, hence no successor	
+				if(curr->parent == 0) {
+				 	return 0;
+				}
+	 	 	}
+		
+		curr = curr->parent;
+		return curr;
+	 	}
 	}
+    	
+	//if Node has a right child
+	else {	
+		//go to the right node
+	 	curr = curr->right;
+		
+		//if current node has a left node, keep going to the leftmost node
+		//otherwise successor will be the right child
+		while (curr->left != 0) {
+			 curr = curr->left;
+		}
+	
+		return curr;
+	 }
+     }
 };
 
 /**
