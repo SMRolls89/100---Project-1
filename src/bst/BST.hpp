@@ -247,9 +247,9 @@ class BST {
 		    return;
 	    }
 		//deleting every member of the Node
-	    delete(n->left);
-	    delete(n->right);
-	    delete(n->parent);
+	    deleteAll(n->left);
+	    deleteAll(n->right);
+	    //delete(n->parent);
 	    //delete(n->data); 
 	    delete n;
     }
