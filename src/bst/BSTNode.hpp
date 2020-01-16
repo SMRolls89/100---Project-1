@@ -10,8 +10,9 @@
 using namespace std;
 
 /**
+ * This class contains the constructor that initializes an empty BST
+ * and the successor method that finds the successor of a BSTNode
  * 
- *
  */
 template <typename Data>
 class BSTNode {
@@ -23,7 +24,9 @@ class BSTNode {
 
     Data data;
 
-    /**Initializing a BSTNode with given data/ no parent and no children*/ 
+    /**Initialize a BSTNode with given the given data having no parent and no children
+    * aka initialize the root node 
+    */
     BSTNode(const Data& d) : data(d) {
     	left = right = parent = 0;
     }
