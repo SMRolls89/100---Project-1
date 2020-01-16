@@ -10,9 +10,9 @@
 using namespace std;
 
 /**
- * This class contains the constructor that initializes an empty BST
- * and the successor method that finds the successor of a BSTNode
- * 
+ * This file implements the BSTNode functions.
+ * One such function is the successor() function  that finds the successor of a BSTNode.
+ * It also contains the constructor that initializes an empty BST.
  */
 template <typename Data>
 class BSTNode {
