@@ -1,6 +1,7 @@
 /**
  * Steffe Reyes (A16083679)
  * Ji Hyun An (A91108783)
+ * CSE100 - PA1
  */
 #ifndef BST_HPP
 #define BST_HPP
@@ -12,7 +13,9 @@
 using namespace std;
 
 /**
- * TODO: add class header
+ * This file contains the definition of a BST.
+ * Most of the BST functions are implemented here
+ * such as insert, delete, find, etc.
  */
 template <typename Data>
 class BST {
@@ -41,38 +44,46 @@ class BST {
     /** TODO */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
 
-    /** delete every node in the BST */
+    /** Delete every node in the BST
+     * Implemented by the DeleteAll helper function
+     */
     ~BST() {
 	    deleteAll(root);
     }
 
-    /** insert a Node  */
+    /** Insert a node with the given data  */
     bool insert(const Data& item) {
-	    //if root is empty, add new node to root
+	    //if root is empty, add a node (root)
 	    if (empty()) {
 		    root = new BSTNode<Data> (item);
-
+		    
+		    //update the size of the BST and return true
 		    ++isize;
 		    return true;
 	    }
-	    //root node not empty, so insert node to correct position
+	    //if root node not empty, insert node to correct position
 	    else {
 		    BSTNode<Data>* curr = this->root;
 
 		    while(curr) {
-			    //if node belongs in left subtree
+			    /** If element to be inserted is smaller than the current node element
+			    * then element belongs in the left subtree
+			    */
 			    if(item < curr->data) { 
+				    // if the left child is empty, then insert new element to the left child
 				    if(curr->left == 0) {
 					    curr->left = new BSTNode<Data> (item);
 					    (curr->left)->parent = curr;
 					    break;
 				    }
-				    else {
-					    //go to the next left leaf
+ 				    else {
+					    //otherwise go to the next left leaf
 					    curr = curr->left;
 				    }
 			    }
-			    //node belongs in the right subtree
+			    /**If element to be inserted is greater than the current node element
+			     * then element belongs in the right subtree
+			     */
 			    else if (curr->data < item) { 
 				    if (curr->right == 0) {
 					    curr->right = new BSTNode<Data> (item);
@@ -85,9 +96,12 @@ class BST {
 				    }
 			    }
 
-			    //if item is a duplicate
+			    /* otherwise, element to be inserted must be equal to the current element
+			     * hence a duplicate
+			     * return false
+			     */
 			    else {
-				    //if it is equal to curr
+				    //check to make sure they are indeed equal
 				    if (!(item < curr->data) && !(curr->data < item)) { 
 					    return false;
 				    }
@@ -95,15 +109,20 @@ class BST {
 		    }
 	    }
 
+	    	    //lines below will only be executed when a new node is inserted
 		    ++isize;
-
 		    return true;
 	   
     }
 
-    /** TODO */
+    /** Find an item in the BST 
+     * This method will return an iterator pointing to the item 
+     * we are trying to find.
+     * Or it will return an iterator pointing past the last node
+     * of the BST if the item was not found.
+     */
     iterator find(const Data& item) const {
-	  BSTNode<Data>* curr = this->root;
+	  BSTNode<Data>* curr = root;
 	  
 	  //if BST is empty
 	  if (empty()) {
@@ -112,9 +131,11 @@ class BST {
 
 	  //if BST not empty, search for item
 	  while(curr) {
+		  //If item is smaller than the current element, go the left leaf
 		  if (item < curr->data) {
 			  curr = curr->left;
 		  }
+		  //If item is larger than the current element, go to the right leaf
 		  else if (curr->data < item) {
 			  curr = curr->right;
 		  }
@@ -123,8 +144,9 @@ class BST {
 		  }
 	  }
 
-	  //if item not found, or pointing past last node
+	  //otherwise, item not found
 	  return this -> end();
+
 
     }
 
@@ -138,16 +160,16 @@ class BST {
 
     /** calculates the height of the BST */
     int height() const {
-	    //BSTNode<Data>* curr = this->root;
-	    //empty BST
-	    if (root == 0 ) {  //if (isize == 0)
+	    
+	    //if empty BST
+	    if (root == 0 ) { 
 		return -1;
 	    }
-	    //if only root node (one node)
-	    else if (root->right == 0 && root->left == 0) { //if (isize == 1)
+	    //if there's only the root node (one node)
+	    else if (root->right == 0 && root->left == 0) {
 		return 0;
 	    }	
-    	    else { //height is not -1 or 0, call height helper method
+    	    else { //if more than 1 node, hence height is not -1 or 0, call height helper method
 		return heightHelper(root);
 	    }		
     }
@@ -162,7 +184,9 @@ class BST {
 	    }
     }
 
-    /** return an iterator pointing to the first item in BST */
+    /** Return an iterator pointing to the first item in the BST
+     * Implemented through the use a helper function
+    */
     iterator begin() const { 
 	    return BST<Data>::iterator(first(root)); 
     }
@@ -170,7 +194,10 @@ class BST {
     /** Return an iterator pointing past the last item in the BST. */
     iterator end() const { return typename BST<Data>::iterator(0); }
 
-    /**perform an inorder traversal of BST */
+    /** Perform an inorder traversal of BST 
+     * and store its elements into a vector.
+     * Implemeneted by the use of a halper function.
+    */
     vector<Data> inorder() {
 
    	    return inorder(root); 
@@ -224,10 +251,12 @@ class BST {
   private:
     /** Helper function for begin() */
     /** Find the first element of the BST */
-    static BSTNode<Data>* first(BSTNode<Data>* root) { 
+    static BSTNode<Data>* first(BSTNode<Data>* root) {
+	    //check if BST is empty 
 	    if(root == 0) {
 		    return 0;
 	    }
+	    //go the the left most node
 	    while (root->left !=0) {
 		    root = root->left;
 	    }
@@ -261,7 +290,7 @@ class BST {
     }
 
     // Add more helper functions below
-    // recursive height helper function
+    // Recursive height helper function
     int heightHelper(BSTNode<Data>* n) const {
 
 	    if (n == 0) return -1;
@@ -282,7 +311,7 @@ class BST {
 	    //vector<Data> v1;
 
 	    if (n == 0) {
-		    return v1; //can you return an empty vector?
+		    return v1;
 	    }
 	    //traverse the left subtree
 	    inorder(n->left);
