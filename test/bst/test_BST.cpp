@@ -59,3 +59,7 @@ TEST_F(SmallBSTFixture, SMALL_INSERT_DUPLICATES_TEST) {
 }
 
 // TODO: add more BST tests here
+
+TEST_F(SmallBSTFixture, SMALL_HEIGHT_TEST) {
+	ASSERT_EQ(bst.height(), 2 );
+}
