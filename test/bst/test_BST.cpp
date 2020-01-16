@@ -64,6 +64,15 @@ TEST_F(SmallBSTFixture, SMALL_HEIGHT_TEST) {
 	ASSERT_EQ(bst.height(), 2 );
 }
 
+TEST_F(SmallBSTFixture, SMALL_FIND_TEST) {
+	//assert that the element was found in the BST
+	ASSERT_EQ(*(bst.find(4)), 4);
+}
+
+TEST_F(SmallBSTFixture, SMALL_NOTFOUND_TEST) {
+	//asset that the element was not found in the BST
+	ASSERT_EQ(bst.find(2), bst.end());
+}
 //TEST_F(SmallBSTFixture, SMALL_DELETE_TEST) {
 	
 //}
