@@ -26,6 +26,8 @@ class BST {
     // height of this BST.
     int iheight;
 
+    vector<Data> v1;
+
   public:
     /** Define iterator as an aliased typename for BSTIterator<Data>. */
     typedef BSTIterator<Data> iterator;
@@ -169,7 +171,7 @@ class BST {
     iterator end() const { return typename BST<Data>::iterator(0); }
 
     /**perform an inorder traversal of BST */
-    vector<Data> inorder() const {
+    vector<Data> inorder() {
 
    	    return inorder(root); 
     }
@@ -266,14 +268,14 @@ class BST {
 	    if (left < right){
 		    return (right+1);
 	    }
-	    else {
+	    else{ 
 		    return (left+1);
 	    }
     }
 
     //Recursive inroder traversal helper function 
-    vector<Data> inorder(BSTNode<Data>* n) const {
-	    vector<Data> v1;
+    vector<Data> inorder(BSTNode<Data>* n)  {
+	    //vector<Data> v1;
 
 	    if (n == 0) {
 		    return v1; //can you return an empty vector?
@@ -281,7 +283,7 @@ class BST {
 	    //traverse the left subtree
 	    inorder(n->left);
 	    //add current node to vector
-	    v1.push_back(*n);
+	    v1.push_back(n->data);
 	    //traverse the right subtree
 	    inorder(n->right);
 
