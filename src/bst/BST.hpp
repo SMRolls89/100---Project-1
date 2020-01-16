@@ -138,17 +138,17 @@ class BST {
 
     /** calculates the height of the BST */
     int height() const {
-	    BSTNode<Data>* curr = this->root;
+	    //BSTNode<Data>* curr = this->root;
 	    //empty BST
-	    if (curr == 0 ) {  //if (isize == 0)
+	    if (root == 0 ) {  //if (isize == 0)
 		return -1;
 	    }
 	    //if only root node (one node)
-	    else if (curr->right == 0 && curr->left == 0) { //if (isize == 1)
+	    else if (root->right == 0 && root->left == 0) { //if (isize == 1)
 		return 0;
 	    }	
     	    else { //height is not -1 or 0, call height helper method
-		return heightHelper(curr);
+		return heightHelper(root);
 	    }		
     }
 
@@ -263,6 +263,8 @@ class BST {
     // Add more helper functions below
     // recursive height helper function
     int heightHelper(BSTNode<Data>* n) const {
+
+	    if (n == 0) return -1;
 
 	    int right = heightHelper(n->right);
 	    int left = heightHelper(n->left);
