@@ -34,7 +34,7 @@ class BSTNode {
 
     /**Return the successor of a BSTNode, or 0 if none */
     BSTNode<Data>* successor() {
-	 /BSTNode<Data> *curr = this;
+	 BSTNode<Data> *curr = this;
 	  
 	  //if there's a right subtree, then successor
 	  //is the most left node of the right subtree
@@ -63,8 +63,9 @@ class BSTNode {
     }*/
 	    if (this->right == 0) {
 
-		    if (this->parent ==0)
+		    if (this->parent == 0){
 			    return 0;
+		    }
 
 		    if (this == ((this->parent) -> left)) {
 			    return this->parent;
