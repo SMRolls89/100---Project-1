@@ -63,3 +63,8 @@ TEST_F(SmallBSTFixture, SMALL_INSERT_DUPLICATES_TEST) {
 TEST_F(SmallBSTFixture, SMALL_HEIGHT_TEST) {
 	ASSERT_EQ(bst.height(), 2 );
 }
+
+//TEST_F(SmallBSTFixture, SMALL_DELETE_TEST) {
+	
+//}
+
