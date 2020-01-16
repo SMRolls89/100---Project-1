@@ -250,7 +250,7 @@ class BST {
 	    delete(n->left);
 	    delete(n->right);
 	    delete(n->parent);
-	    delete(n->data); 
+	    //delete(n->data); 
 	    delete n;
     }
 
