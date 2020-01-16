@@ -1,6 +1,7 @@
 /**
  * Steffe Reyes (A16083679)
  * Ji Hyun An (A91108783)
+ * CSE100 - PA1
  * */
 #ifndef BSTITERATOR_HPP
 #define BSTITERATOR_HPP
@@ -11,7 +12,8 @@
 using namespace std;
 
 /**
- * TODO: add class header
+ * This file contains the methods and 
+ * class definition for a BSTIterator
  */
 template <typename Data>
 class BSTIterator : public iterator<input_iterator_tag, Data> {
@@ -41,16 +43,20 @@ class BSTIterator : public iterator<input_iterator_tag, Data> {
         return before;
     }
 
-    /** equality test */
+    /** Equality test operator */
     bool operator==(BSTIterator<Data> const& other) const {
+	    /** Return true if the reference, other, is equal to the calling object. 
+	     *  Two iterators are equal if they ar eboth pointing to the same BSTNode.
+	     */
 	    if(curr == other.curr)
 		   return true;
 	    else
 		   return false;
     }
 
-    /** inequality test */
+    /** Inequality test operator */
     bool operator!=(BSTIterator<Data> const& other) const {
+	    // Return true if other is not equal to the calling object
 	    if(curr != other.curr)
 		    return true;
 	    else
