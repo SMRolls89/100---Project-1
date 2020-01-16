@@ -140,11 +140,11 @@ class BST {
     int height() const {
 	    BSTNode<Data>* curr = this->root;
 	    //empty BST
-	    if (curr == 0 ){
+	    if (curr == 0 ) {  //if (isize == 0)
 		return -1;
 	    }
 	    //if only root node (one node)
-	    else if (curr->right == 0 && curr->left == 0) {
+	    else if (curr->right == 0 && curr->left == 0) { //if (isize == 1)
 		return 0;
 	    }	
     	    else { //height is not -1 or 0, call height helper method
@@ -154,7 +154,7 @@ class BST {
 
     /** checks if BST is empty or not */
     bool empty() const { 
-	    if (root == 0) { 
+	    if (isize ==  0) { 
 		    return true;
 	    }
 	    else { //BST not empty
