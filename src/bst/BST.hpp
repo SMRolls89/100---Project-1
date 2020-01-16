@@ -246,9 +246,11 @@ class BST {
 	    if (n == 0){
 		    return;
 	    }
-
+		//deleting every member of the Node
 	    delete(n->left);
 	    delete(n->right);
+	    delete(n->parent);
+	    delete(n->data); 
 	    delete n;
     }
 
