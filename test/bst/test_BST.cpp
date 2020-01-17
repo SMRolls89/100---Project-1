@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 #include "BST.hpp"
 #include "util.hpp"
+#include "BSTNode.hpp"
 
 using namespace std;
 using namespace testing;
@@ -17,6 +18,17 @@ using namespace testing;
 TEST(BSTTests, EMPTY_TREE_HEIGHT_TEST) {
     BST<int> bst;
     ASSERT_EQ(bst.height(), -1);
+}
+
+
+TEST(BSTTests, EMPTY_BST_SIZE_TEST) {
+	BST<int> bst;
+	ASSERT_EQ(bst.size(), 0);	
+}
+
+TEST(BSTTests, EMPTY_BST_EMPTYBOOLFUNC) {
+	BST<int> bst;
+	ASSERT_EQ(bst.empty(), 1);
 }
 
 /* Small BST test starts here */
@@ -73,7 +85,28 @@ TEST_F(SmallBSTFixture, SMALL_NOTFOUND_TEST) {
 	//asset that the element was not found in the BST
 	ASSERT_EQ(bst.find(2), bst.end());
 }
-//TEST_F(SmallBSTFixture, SMALL_DELETE_TEST) {
-	
-//}
+TEST_F(SmallBSTFixture, SMALL_EMPTYBOOL_TEST) {
+	ASSERT_EQ(bst.empty(), 0);
+}
+
+TEST_F(SmallBSTFixture, SMALL_BEGIN_TEST) {
+	ASSERT_EQ(*(bst.begin()), -33);
+}
+
+TEST_F(SmallBSTFixture, SMALL_ENG_TEST) {
+	ASSERT_NE(bst.end(), bst.begin());
+}
+
+TEST_F(SmallBSTFixture, SMALL_INSERT_TEST) {
+	ASSERT_TRUE(bst.insert(48));
+
+}
+
+TEST_F(SmallBSTFixture, SMALL_DELETENODE) {
+	ASSERT_FALSE(bst.deleteNode(5));
+}
+
+TEST_F(SmallBSTFixture, SMALL_inorder) {
+	ASSERT_NE(bst.inorder(), bst.inorder());
+}
 
