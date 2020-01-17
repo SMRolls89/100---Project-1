@@ -272,10 +272,11 @@ class BST {
            recursively delete right sub-tree
            delete current node
         */
+	    //if BST is empty, nothing to delete
 	    if (n == 0){
 		    return;
 	    }
-		//deleting every member of the Node recursively
+	    //deleting every member of the Node recursively
 	    deleteAll(n->left);
 	    deleteAll(n->right); 
 	    delete n;
@@ -288,14 +289,20 @@ class BST {
     }
 
     // Add more helper functions below
-    // Recursive height helper function
+    /** Recursive height helper function
+     * This function will compute the  depth of the BST,
+     * that is, the number of nodes along the path from the root node, 
+     * down to the farthest leaf node.
+     */
     int heightHelper(BSTNode<Data>* n) const {
-
+	    //if empty BST, return -1
 	    if (n == 0) return -1;
-
+	    
+	    //compute the depth of each subtree
 	    int right = heightHelper(n->right);
 	    int left = heightHelper(n->left);
-
+		
+	    // return the larger depth calculated
 	    if (left < right){
 		    return (right+1);
 	    }
