@@ -275,11 +275,9 @@ class BST {
 	    if (n == 0){
 		    return;
 	    }
-		//deleting every member of the Node
+		//deleting every member of the Node recursively
 	    deleteAll(n->left);
-	    deleteAll(n->right);
-	    //delete(n->parent);
-	    //delete(n->data); 
+	    deleteAll(n->right); 
 	    delete n;
     }
 
