@@ -42,7 +42,15 @@ class BST {
     BST() : root(0), isize(0), iheight(-1) {}
 
     /** TODO */
-    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {}
+    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
+	    vector<Data> v = inorder();
+	    int depth = -1;
+
+	   
+	    return buildSubtree(v, 0, v.size() - 1, depth);
+    
+    
+    }
 
     /** Delete every node in the BST
      * Implemented by the DeleteAll helper function
@@ -285,7 +293,20 @@ class BST {
     /** TODO */
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end,
                                 int depth) {
-        return 0;
+	//base case
+        if (start > end) {
+		return 0;
+	}
+	
+	//make middle element into the root
+	int middle = (start + end)/ / 2;
+
+	BSTNode<Data>* current = data[middle];
+
+	current->left = buildSubtree(data, start, middle -1, ++depth)
+	current->right = buildSubTree(data, mid + 1, ++depth);
+
+	return current;
     }
 
     // Add more helper functions below
