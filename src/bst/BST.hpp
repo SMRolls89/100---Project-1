@@ -158,7 +158,9 @@ class BST {
     }
 
     /** TODO */
-    bool deleteNode(const Data& item) { return false; }
+    bool deleteNode(const Data& item) {
+	    return deleteNode(root, item);	    
+    }
 
     /** return number of items currently in BST */
     unsigned int size() const { 
@@ -346,6 +348,73 @@ class BST {
 	    inorder(n->right);
 
 	    return v1;
+    }
+
+    bool deleteNode(BSTNode<Data>* n, const Data& item){
+	    //base case: empty bst
+	    if ( n == 0 ) return 0;
+
+	    while (n) {
+		    if (item < n->data){
+			    n = n->left;
+		    }
+		    else if (n->data < item){
+			    n = n->right;
+		    }
+		    else {
+			    if (n->left == 0 && n->right == 0) {
+				    if ( n != root ){
+					    if ( (n->parent)->left == n )
+						    (n->parent)->left = nullptr;
+					    else
+						    (n->parent)->right = nullptr;
+				    }
+				    else
+					    root = nullptr;
+
+				    free(n);
+			    }
+
+			    else if (n->left && n->right) {
+				    BSTNode<Data>* succ = minKey(n->right);
+
+				    int temp = succ->data;
+
+				    deleteNode(root, succ->data);
+
+				    n->data = temp;
+			    }
+
+			    else {
+				    BSTNode<Data>* child = (n->left)? n->left: n->right;
+
+				    if (n != root) {
+					    if (n == (n->parent)->left)
+						    (n->parent)->left = child;
+					    else
+						    (n->parent)->right = child;
+				    }
+
+				    else
+					    root = child;
+
+				    free(n);
+			    }
+
+			    return 1;
+
+		    }
+	    }
+	    return 0;
+    }
+
+    //helper function for deleteNode
+    //this function finds the minimum value node in a subtree rooted at curr
+    BSTNode<Data>* minKey(BSTNode<Data>* curr){
+	    while(curr->left != 0) {
+		    curr = curr->left;
+	    }
+	    return curr;
     }
 };
 
