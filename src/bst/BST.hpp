@@ -43,13 +43,12 @@ class BST {
 
     /** TODO */
     BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
+
 	    vector<Data> v = inorder();
 	    int depth = -1;
 
 	   
-	    return buildSubtree(v, 0, v.size() - 1, depth);
-    
-    
+	    buildSubtree(v, 0, v.size() - 1, depth);
     }
 
     /** Delete every node in the BST
@@ -291,20 +290,20 @@ class BST {
     }
 
     /** TODO */
-    BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end,
-                                int depth) {
+    BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end, int depth) {
+	    
 	//base case
         if (start > end) {
 		return 0;
 	}
 	
 	//make middle element into the root
-	int middle = (start + end)/ / 2;
+	int middle = (start + end) / 2;
 
-	BSTNode<Data>* current = data[middle];
+	BSTNode<Data>* current = new BSTNode<Data> ( data[middle]);
 
-	current->left = buildSubtree(data, start, middle -1, ++depth)
-	current->right = buildSubTree(data, mid + 1, ++depth);
+	current->left = buildSubtree(data, start, middle -1, ++depth);
+	current->right = buildSubtree(data, middle + 1, end, ++depth);
 
 	return current;
     }
