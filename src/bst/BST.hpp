@@ -42,13 +42,13 @@ class BST {
     BST() : root(0), isize(0), iheight(-1) {}
 
     /** TODO */
-    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
+    BST(const BSTNode<Data>& bst) : root(0), isize(0), iheight(-1) {
 
 	    vector<Data> v = inorder();
 	    int depth = -1;
 
 	   
-	    buildSubtree(v, 0, v.size() - 1, depth);
+	    bst = buildSubtree(v, 0, v.size() - 1, depth);
     }
 
     /** Delete every node in the BST
