@@ -3,6 +3,7 @@
  * Ji Hyun An (A91108783)
  * CSE100 - PA1
  */
+
 #ifndef BST_HPP
 #define BST_HPP
 #include <iostream>
@@ -68,11 +69,12 @@ class BST {
 		    
 		    //update the size of the BST and return true
 		    ++isize;
+		    ++iheight; //added
 		    return true;
 	    }
 	    //if root node not empty, insert node to correct position
 	    else {
-		    BSTNode<Data>* curr = this->root;
+		    BSTNode<Data>* curr = this->root; 
 
 		    while(curr) {
 			    /** If element to be inserted is smaller than the current node element
@@ -120,8 +122,13 @@ class BST {
 
 	    	    //lines below will only be executed when a new node is inserted
 		    ++isize;
+		    //height added
+		    int temp = height();
+		    if (iheight < temp) {
+			    ++iheight;
+		    }
 		    return true;
-	   
+			    
     }
 
     /** Find an item in the BST 
@@ -240,6 +247,10 @@ class BST {
 				    --isize;
 			    }
 
+			    int tmp = height();
+			    if (tmp < iheight){
+				    --iheight;
+			    }
 			    return true;
 
 		    }
@@ -261,7 +272,10 @@ class BST {
 	    }
 	    //if there's only the root node (one node)
 	    else if (root->right == 0 && root->left == 0) {
-		return 0;
+		/*iheight = '0';
+		return iheight;*/
+		    //return 0;
+		    return iheight;
 	    }	
     	    else { //if more than 1 node, hence height is not -1 or 0, call height helper method
 		return heightHelper(root);
