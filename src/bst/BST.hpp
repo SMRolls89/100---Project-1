@@ -154,7 +154,7 @@ class BST {
 	  }
 
 	  //otherwise, item not found
-	  return this -> end();
+	  return this->end(); //got rid of this->
 
 
     }
