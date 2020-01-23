@@ -102,9 +102,24 @@ TEST_F(SmallBSTFixture, SMALL_INSERT_TEST) {
 
 }
 
+//testing for deleteNode 
 TEST_F(SmallBSTFixture, SMALL_DELETENODE) {
-	ASSERT_FALSE(bst.deleteNode(5));
+	ASSERT_EQ(*(bst.find(-33)), -33);
+	ASSERT_TRUE(bst.deleteNode(-33));
+	ASSERT_EQ(bst.find(-33), nullptr);
 }
+
+TEST_F(SmallBSTFixture, SMALL_DELETENODE_RIGHT){
+	ASSERT_TRUE(bst.deleteNode(100));
+}
+
+TEST_F(SmallBSTFixture, SMALL_DELETENODE_CHILD){
+	ASSERT_FALSE(bst.deleteNode(27));
+}
+//testing for finding something that's not in the tree
+/*TEST_F(SmallBSTFixture, SMALL_FIND){
+	ASSERT
+}*/
 
 TEST_F(SmallBSTFixture, SMALL_inorder) {
 	ASSERT_NE(bst.inorder(), bst.inorder());
