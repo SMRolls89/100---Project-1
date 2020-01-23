@@ -390,13 +390,13 @@ class BST {
 				    BSTNode<Data>* succ = minKey(n->right);
 
 				    //store the successor value
-				    BSTNode<Data>* temp = succ;
+				    Data temp = succ->data;
 
 				    //recursively delete the successor
 				    deleteNode(root, succ->data);
 
 				    //copy the value of successor to the current node
-				    n->data = temp->data;
+				    n->data = temp;
 			    }
 
 			    //CASE 3: node to be deleted has only one child
