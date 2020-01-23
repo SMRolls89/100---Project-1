@@ -47,8 +47,8 @@ class BST {
 	    vector<Data> v = inorder();
 	    int depth = -1; //what is depth exactly?
 
-	    BSTNode<Data>* bal = new BSTNode<Data> (buildSubtree(v, 0, v.size() -1, depth)); 
-	    bst =  bal;
+	    BSTNode<Data>* bal = new BSTNode<Data> (buildSubtree(v, 0, v.size() -1, depth));
+	    //bst = buildSubtree(v, 0, v.size() -1, depth); 
     }
 
     /** Delete every node in the BST
@@ -353,7 +353,8 @@ class BST {
     bool deleteNode(BSTNode<Data>* n, const Data& item){
 	    //base case: empty bst
 	    if ( n == 0 ) return 0;
-
+	    
+	    //find if Node to be deleted is in BST
 	    while (n) {
 		    if (item < n->data){
 			    n = n->left;
@@ -361,33 +362,51 @@ class BST {
 		    else if (n->data < item){
 			    n = n->right;
 		    }
-		    else {
+		    //found it!!
+		    else { 
+			    //CASE 1: node to be deleted has no children
+			    //** it is a leaf node
 			    if (n->left == 0 && n->right == 0) {
 				    if ( n != root ){
+					    //either it is a left child or right child
 					    if ( (n->parent)->left == n )
 						    (n->parent)->left = nullptr;
 					    else
 						    (n->parent)->right = nullptr;
 				    }
+
+				    //if BST only has one  node, the root, delete it
 				    else
 					    root = nullptr;
 
-				    free(n);
+				    delete n; //free it!
+				    --isize; //update size
 			    }
 
+			    //CASE 2:  node to be deleted has two  children
 			    else if (n->left && n->right) {
+
+				    //find it's successor node
 				    BSTNode<Data>* succ = minKey(n->right);
 
-				    int temp = succ->data;
+				    //store the successor value
+				    BSTNode<Data>* temp = succ;
 
+				    //recursively delete the successor
 				    deleteNode(root, succ->data);
 
-				    n->data = temp;
+				    //copy the value of successor to the current node
+				    n->data = temp->data;
 			    }
 
-			    else {
-				    BSTNode<Data>* child = (n->left)? n->left: n->right;
+			    //CASE 3: node to be deleted has only one child
+			    else {	
 
+				    //find the child node
+				    BSTNode<Data>* child = (n->left)? n->left: n->right;
+	
+				    //if node to be deleted is not a root node
+				    //then set it's parent to it's child
 				    if (n != root) {
 					    if (n == (n->parent)->left)
 						    (n->parent)->left = child;
@@ -395,10 +414,12 @@ class BST {
 						    (n->parent)->right = child;
 				    }
 
+				    //if node to be deleted is root node, then set root to child
 				    else
 					    root = child;
 
-				    free(n);
+				    delete n;
+				    --isize;
 			    }
 
 			    return 1;
