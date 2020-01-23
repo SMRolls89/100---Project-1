@@ -387,7 +387,11 @@ class BST {
 	//make middle element into the root
 	int middle = (start + end) / 2;
 
-	BSTNode<Data>* n = new BSTNode<Data> (data[middle]);
+	//BSTNode<Data>* n = new BSTNode<Data> (data[middle]);
+	
+	BSTNode<Data>*n = root;
+
+	root = new BSTNode<Data> (data[middle]);
 
 	//n->data = data[middle];
 
