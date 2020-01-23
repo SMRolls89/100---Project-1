@@ -159,7 +159,83 @@ class BST {
 
     /** TODO */
     bool deleteNode(const Data& item) {
-	    return deleteNode(root, item);	    
+	    	   
+	   BSTNode<Data>* n = root; 
+	    //base case: empty bst
+	    if ( n == 0 ) return 0;
+	    
+	    //find if Node to be deleted is in BST
+	    while (n) {
+		    if (item < n->data){
+			    n = n->left;
+		    }
+		    else if (n->data < item){
+			    n = n->right;
+		    }
+		    //found it!!
+		    else { 
+			    //CASE 1: node to be deleted has no children
+			    //** it is a leaf node
+			    if (n->left == 0 && n->right == 0) {
+				    if ( n != root ){
+					    //either it is a left child or right child
+					    if ( (n->parent)->left == n )
+						    (n->parent)->left = nullptr;
+					    else
+						    (n->parent)->right = nullptr;
+				    }
+
+				    //if BST only has one  node, the root, delete it
+				    else
+					    root = nullptr;
+
+				    delete n; //free it!
+				    --isize; //update size
+			    }
+
+			    //CASE 2:  node to be deleted has two  children
+			    else if (n->left && n->right) {
+
+				    //find it's successor node
+				    BSTNode<Data>* succ = minKey(n->right);
+
+				    //store the successor value
+				    Data temp = succ->data;
+
+				    //recursively delete the successor
+				    deleteNode(succ->data);
+
+				    //copy the value of successor to the current node
+				    n->data = temp;
+			    }
+
+			    //CASE 3: node to be deleted has only one child
+			    else {	
+
+				    //find the child node
+				    BSTNode<Data>* child = (n->left)? n->left: n->right;
+	
+				    //if node to be deleted is not a root node
+				    //then set it's parent to it's child
+				    if (n != root) {
+					    if (n == (n->parent)->left)
+						    (n->parent)->left = child;
+					    else
+						    (n->parent)->right = child;
+				    }
+
+				    //if node to be deleted is root node, then set root to child
+				    else
+					    root = child;
+
+				    delete n;
+				    --isize;
+			    }
+
+			    return 1;
+
+		    }
+	    }
     }
 
     /** return number of items currently in BST */
@@ -350,7 +426,7 @@ class BST {
 	    return v1;
     }
 
-    bool deleteNode(BSTNode<Data>* n, const Data& item){
+  /**  bool deleteNode(BSTNode<Data>* n, const Data& item){
 	    //base case: empty bst
 	    if ( n == 0 ) return 0;
 	    
@@ -427,7 +503,7 @@ class BST {
 		    }
 	    }
 	    return 0;
-    }
+    }*/
 
     //helper function for deleteNode
     //this function finds the minimum value node in a subtree rooted at curr
