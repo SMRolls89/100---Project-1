@@ -381,7 +381,7 @@ class BST {
 	//make middle element into the root
 	int middle = (start + end) / 2;
 
-	BSTNode<Data>* current = new BSTNode<Data> (data[middle]);
+	//BSTNode<Data>* current = new BSTNode<Data> (data[middle]);
 
 	current->left = buildSubtree(data, start, middle -1, ++depth);
 	current->right = buildSubtree(data, middle + 1, end, ++depth);
