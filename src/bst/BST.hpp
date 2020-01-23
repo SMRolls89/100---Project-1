@@ -44,12 +44,14 @@ class BST {
     BST() : root(0), isize(0), iheight(-1) {}
 
     /** TODO */
-    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
+    BST(const BSTNode<Data>& bst) : root(0), isize(0), iheight(-1) {
 
 	    vector<Data> v = inorder();
 	    int depth = -1; //what is depth exactly?
 
 	    root = buildSubtree(v, 0, v.size() -1, depth);
+
+	    
 	    //bst = buildSubtree(v, 0, v.size() -1, depth); 
     }
 
