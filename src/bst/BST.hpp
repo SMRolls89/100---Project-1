@@ -236,6 +236,7 @@ class BST {
 
 		    }
 	    }
+	    return 0;
     }
 
     /** return number of items currently in BST */
