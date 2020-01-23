@@ -393,7 +393,7 @@ class BST {
 
 	//root = new BSTNode<Data> (data[middle]);
 
-	n->data = new BSTNode<Data>(data[middle]);
+	n->data = data[middle];
 
 	n->left = buildSubtree(data, start, middle -1, ++depth);
 	n->right = buildSubtree(data, middle + 1, end, ++depth);
