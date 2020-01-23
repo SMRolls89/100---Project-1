@@ -164,7 +164,7 @@ class BST {
 	    	   
 	   BSTNode<Data>* n = root; 
 	    //base case: empty bst
-	    if ( n == 0 ) return 0;
+	    if ( n == NULL ) return false;
 	    
 	    //find if Node to be deleted is in BST
 	    while (n) {
@@ -178,7 +178,7 @@ class BST {
 		    else { 
 			    //CASE 1: node to be deleted has no children
 			    //** it is a leaf node
-			    if (n->left == 0 && n->right == 0) {
+			    if (n->left == NULL && n->right == NULL) {
 				    if ( n != root ){
 					    //either it is a left child or right child
 					    if ( (n->parent)->left == n )
@@ -215,7 +215,13 @@ class BST {
 			    else {	
 
 				    //find the child node
-				    BSTNode<Data>* child = (n->left)? n->left: n->right;
+				    BSTNode<Data>* child; 
+				    if(n->left){
+				    	child = n->left;
+				    }
+				    else{
+					 child = n->right;
+				    }
 	
 				    //if node to be deleted is not a root node
 				    //then set it's parent to it's child
@@ -234,11 +240,11 @@ class BST {
 				    --isize;
 			    }
 
-			    return 1;
+			    return true;
 
 		    }
 	    }
-	    return 0;
+	    return false;
     }
 
     /** return number of items currently in BST */
