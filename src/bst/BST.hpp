@@ -45,10 +45,10 @@ class BST {
     BST(const BSTNode<Data>& bst) : root(0), isize(0), iheight(-1) {
 
 	    vector<Data> v = inorder();
-	    int depth = -1;
+	    int depth = -1; //what is depth exactly?
 
-	   
-	    bst = buildSubtree(v, 0, v.size() - 1, depth);
+	    BSTNode<Data>* bal = new BSTNode<Data> (buildSubtree(v, 0, v.size() -1, depth)); 
+	    bst =  bal;
     }
 
     /** Delete every node in the BST
@@ -295,14 +295,14 @@ class BST {
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end, int depth) {
 	    
 	//base case
-        if (start > end) {
+        if (empty()) {
 		return 0;
 	}
 	
 	//make middle element into the root
 	int middle = (start + end) / 2;
 
-	BSTNode<Data>* current = new BSTNode<Data> ( data[middle]);
+	BSTNode<Data>* current = new BSTNode<Data> (data[middle]);
 
 	current->left = buildSubtree(data, start, middle -1, ++depth);
 	current->right = buildSubtree(data, middle + 1, end, ++depth);
