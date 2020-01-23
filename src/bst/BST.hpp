@@ -21,7 +21,7 @@ template <typename Data>
 class BST {
   protected:
     // pointer to the root of this BST, or 0 if the BST is empty
-    //BSTNode<Data>* root;
+    BSTNode<Data>* root;
 
     // number of Data items stored in this BST.
     unsigned int isize;
@@ -33,7 +33,7 @@ class BST {
 
   public:
 
-    BSTNode<Data>* root;
+    //BSTNode<Data>* root;
     /** Define iterator as an aliased typename for BSTIterator<Data>. */
     typedef BSTIterator<Data> iterator;
 
@@ -44,7 +44,7 @@ class BST {
     BST() : root(0), isize(0), iheight(-1) {}
 
     /** TODO */
-    BST(const BSTNode<Data>& bst) : root(0), isize(0), iheight(-1) {
+    BST(const BST<Data>& bst) : root(0), isize(0), iheight(-1) {
 
 	    vector<Data> v = inorder();
 	    int depth = -1; //what is depth exactly?
@@ -177,7 +177,7 @@ class BST {
 		    //found it!!
 		    else { 
 			    //CASE 1: node to be deleted has no children
-			    //** it is a leaf node
+			    // it is a leaf node
 			    if (n->left == NULL && n->right == NULL) {
 				    if ( n != root ){
 					    //either it is a left child or right child
@@ -381,18 +381,24 @@ class BST {
 	    
 	//base case
         if (empty()) {
-		return 0;
+		return nullptr;
 	}
 	
 	//make middle element into the root
 	int middle = (start + end) / 2;
 
-	BSTNode<Data>* current = new BSTNode<Data> (data[middle]);
+	//BSTNode<Data>* n = new BSTNode<Data> (data[middle]);
+	
+	BSTNode<Data>*n = root;
 
-	current->left = buildSubtree(data, start, middle -1, ++depth);
-	current->right = buildSubtree(data, middle + 1, end, ++depth);
+	//root = new BSTNode<Data> (data[middle]);
 
-	return current;
+	n->data = data[middle];
+
+	n->left = buildSubtree(data, start, middle -1, ++depth);
+	n->right = buildSubtree(data, middle + 1, end, ++depth);
+
+	return n;
     }
 
     // Add more helper functions below
