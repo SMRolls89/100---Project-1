@@ -21,7 +21,7 @@ template <typename Data>
 class BST {
   protected:
     // pointer to the root of this BST, or 0 if the BST is empty
-    BSTNode<Data>* root;
+    //BSTNode<Data>* root;
 
     // number of Data items stored in this BST.
     unsigned int isize;
@@ -32,6 +32,8 @@ class BST {
     vector<Data> v1;
 
   public:
+
+    BSTNode<Data>* root;
     /** Define iterator as an aliased typename for BSTIterator<Data>. */
     typedef BSTIterator<Data> iterator;
 
@@ -47,7 +49,7 @@ class BST {
 	    vector<Data> v = inorder();
 	    int depth = -1; //what is depth exactly?
 
-	    BSTNode<Data>* bal = new BSTNode<Data> (buildSubtree(v, 0, v.size() -1, depth));
+	    root = buildSubtree(v, 0, v.size() -1, depth);
 	    //bst = buildSubtree(v, 0, v.size() -1, depth); 
     }
 
