@@ -380,7 +380,7 @@ class BST {
     BSTNode<Data>* buildSubtree(vector<Data>& data, int start, int end, int depth) {
 	    
 	//base case
-        if (empty()) {
+        if (start > end) {
 		return nullptr;
 	}
 	
@@ -389,7 +389,7 @@ class BST {
 
 	//BSTNode<Data>* n = new BSTNode<Data> (data[middle]);
 	
-	BSTNode<Data>*n = root;
+	BSTNode<Data>* n;
 
 	//root = new BSTNode<Data> (data[middle]);
 
