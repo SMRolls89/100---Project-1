@@ -441,7 +441,7 @@ class BST {
 	    }
     }
 
-    //Recursive inroder traversal helper function 
+    //Recursive inroder traversal helper function. 
     vector<Data> inorder(BSTNode<Data>* n) const  {
 
 	    if (n == 0) {
